@@ -13,12 +13,12 @@ class ViewPostTest extends TestCase
 
     public function testViewPost()
     {
-        $post = factory(Post::class)->create();
+        $post = factory(Post::class)->create(['title' => 'My Title']);
         $response = $this->get('/api/post/' . $post->id);
         $response->assertStatus(200); // success!
         $response->assertJson([
             'id' => $post->id,
-            'title' => $post->title,
+            'title' => 'My Title',
             'content' => $post->content,
             'created_at' => $post->created_at,
             'updated_at' => $post->updated_at,
